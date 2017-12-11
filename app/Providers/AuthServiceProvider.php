@@ -38,8 +38,8 @@ class AuthServiceProvider extends ServiceProvider
             'info-school.read' => '获取您的学院、专业、班级',
             'info-detail.read' => '获取您的性别、生日、宿舍、民族、籍贯等信息',
             'info-secret.read' => '获取您的身份证信息',
+            'role.read' => '查询您是否有是某角色',
             'permission.read' => '查询您是否有某使用e瞳API权限',
-            'permission.write' => '获取所有API权限列表',
         ]);
     }
 }

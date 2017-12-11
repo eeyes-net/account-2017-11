@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('user', 'Api\UserController@show');
 Route::middleware('auth:api')->put('user', 'Api\UserController@update');
 
+Route::middleware('auth:api')->get('user/permission/hasRole', 'Api\RoleController@has')
+    ->middleware('scope:role.read');
 Route::middleware('auth:api')->get('user/permission/can', 'Api\PermissionController@can')
     ->middleware('scope:permission.read');
 Route::middleware('auth:api')->get('user/permission/all', 'Api\PermissionController@all')
