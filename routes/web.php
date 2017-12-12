@@ -11,7 +11,7 @@
 |
 */
 
-Route::view('/', 'welcome');
+Route::view('/', 'index');
 
 Route::get('login', 'Auth\LoginController@login')->middleware('guest')->name('login');
 Route::get('logout', 'Auth\LoginController@logout');
