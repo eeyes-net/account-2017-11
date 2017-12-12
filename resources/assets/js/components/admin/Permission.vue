@@ -164,7 +164,7 @@
 
         methods: {
             getPermissions() {
-                axios.get('/admin/api/permission')
+                axios.get('/api/admin/permission')
                     .then(response => {
                         this.permissions = response.data;
                     })
@@ -184,7 +184,7 @@
             store() {
                 const form = this.createForm;
                 form.errors = [];
-                axios.post('/admin/api/permission', {
+                axios.post('/api/admin/permission', {
                     name: form.name,
                     display_name: form.display_name,
                     description: form.description
@@ -216,7 +216,7 @@
             update() {
                 const form = this.editForm;
                 form.errors = [];
-                axios.put('/admin/api/permission/' + form.id, {
+                axios.put('/api/admin/permission/' + form.id, {
                     name: form.name,
                     display_name: form.display_name,
                     description: form.description
@@ -235,7 +235,7 @@
             },
 
             destroy(permission) {
-                axios.delete('/admin/api/permission/' + permission.id)
+                axios.delete('/api/admin/permission/' + permission.id)
                     .then(response => {
                         this.errors = [];
                         this.getPermissions();

@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,12 +11,46 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('user', 'Api\UserController@show');
-Route::middleware('auth:api')->put('user', 'Api\UserController@update');
+Route::middleware('auth:api')->group(function () {
+    Route::get('user', 'Api\UserController@show');
+    Route::put('user', 'Api\UserController@update');
 
-Route::middleware('auth:api')->get('user/permission/hasRole', 'Api\RoleController@has')
-    ->middleware('scope:role.read');
-Route::middleware('auth:api')->get('user/permission/can', 'Api\PermissionController@can')
-    ->middleware('scope:permission.read');
-Route::middleware('auth:api')->get('user/permission/all', 'Api\PermissionController@all')
-    ->middleware('scope:permission.read');
+    Route::get('user/role/has', 'Api\RoleController@has')->middleware('scope:role.read');
+    Route::get('user/permission/can', 'Api\PermissionController@can')->middleware('scope:permission.read');
+    Route::get('user/permission/all', 'Api\PermissionController@all')->middleware('scope:permission.read');
+
+    Route::prefix('admin')->namespace('Api\Admin')->middleware([
+        'admin',
+        'scope:admin.write',
+    ])->group(function () {
+        Route::resource('user', 'UserController', [
+            'only' => [
+                'index',
+                'store',
+                'show',
+                'update',
+                // 'destroy',
+            ],
+        ]);
+        Route::resource('role', 'RoleController', [
+            'only' => [
+                'index',
+                'store',
+                'show',
+                'update',
+                // 'destroy',
+            ],
+        ]);
+        Route::resource('permission', 'PermissionController', [
+            'only' => [
+                'index',
+                'store',
+                'show',
+                'update',
+                // 'destroy',
+            ],
+        ]);
+    });
+});
+
+

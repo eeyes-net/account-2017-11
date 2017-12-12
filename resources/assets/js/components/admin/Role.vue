@@ -198,7 +198,7 @@
 
         methods: {
             getPermissions() {
-                axios.get('/admin/api/permission')
+                axios.get('/api/admin/permission')
                     .then(response => {
                         this.permissions = response.data;
                     })
@@ -212,7 +212,7 @@
             },
 
             getRoles() {
-                axios.get('/admin/api/role')
+                axios.get('/api/admin/role')
                     .then(response => {
                         this.roles = response.data;
                     })
@@ -244,7 +244,7 @@
             store() {
                 const form = this.createForm;
                 form.errors = [];
-                axios.post('/admin/api/role', {
+                axios.post('/api/admin/role', {
                     name: form.name,
                     display_name: form.display_name,
                     description: form.description
@@ -279,7 +279,7 @@
             update() {
                 const form = this.editForm;
                 form.errors = [];
-                axios.put('/admin/api/role/' + form.id, {
+                axios.put('/api/admin/role/' + form.id, {
                     name: form.name,
                     display_name: form.display_name,
                     description: form.description,
@@ -299,7 +299,7 @@
             },
 
             destroy(role) {
-                axios.delete('/admin/api/role/' + role.id)
+                axios.delete('/api/admin/role/' + role.id)
                     .then(response => {
                         this.errors = [];
                         this.getRoles();

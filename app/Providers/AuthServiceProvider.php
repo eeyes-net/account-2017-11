@@ -40,6 +40,7 @@ class AuthServiceProvider extends ServiceProvider
             'info-secret.read' => '获取您的身份证信息',
             'role.read' => '查询您是否有是某角色',
             'permission.read' => '查询您是否有某使用e瞳API权限',
+            'admin.write' => '后台管理API使用权限',
         ]);
     }
 }

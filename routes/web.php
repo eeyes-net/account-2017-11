@@ -17,49 +17,12 @@ Route::get('login', 'Auth\LoginController@login')->middleware('guest')->name('lo
 Route::get('logout', 'Auth\LoginController@logout');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::view('home', 'home')->middleware('auth')->name('home');
-
-Route::prefix('admin')->namespace('Admin\Api')->middleware(['auth', 'admin'])->group(function () {
-    Route::view('/', 'admin.index')->name('admin');
-    Route::view('user', 'admin.user');
-    Route::view('role', 'admin.role');
-    Route::view('permission', 'admin.permission');
-    Route::prefix('api')->group(function () {
-        Route::resource('user', 'UserController', [
-            'only' => [
-                'index',
-                'store',
-                'show',
-                'update',
-                // 'destroy',
-            ],
-        ]);
-        Route::resource('role', 'RoleController', [
-            'only' => [
-                'index',
-                'store',
-                'show',
-                'update',
-                // 'destroy',
-            ],
-        ]);
-        Route::resource('permission', 'PermissionController', [
-            'only' => [
-                'index',
-                'store',
-                'show',
-                'update',
-                // 'destroy',
-            ],
-        ]);
+Route::middleware('auth')->group(function () {
+    Route::view('home', 'home')->name('home');
+    Route::prefix('admin')->middleware('admin')->group(function () {
+        Route::view('/', 'admin.index')->name('admin');
+        Route::view('user', 'admin.user');
+        Route::view('role', 'admin.role');
+        Route::view('permission', 'admin.permission');
     });
 });
-
-if (App::environment('local')) {
-    Route::prefix('test')->group(function () {
-        Route::get('login', function () {
-            Auth::login(\App\User::first());
-            return redirect('/');
-        });
-    });
-}

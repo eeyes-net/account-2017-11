@@ -233,7 +233,7 @@
 
         methods: {
             getRoles() {
-                axios.get('/admin/api/role')
+                axios.get('/api/admin/role')
                     .then(response => {
                         this.roles = response.data;
                     })
@@ -258,7 +258,7 @@
                 } else if (page >= this.usersPagination.last_page) {
                     page = this.usersPagination.last_page;
                 }
-                axios.get('/admin/api/user?page=' + page)
+                axios.get('/api/admin/user?page=' + page)
                     .then(response => {
                         this.usersPagination = response.data;
                         this.users = this.usersPagination.data;
@@ -291,7 +291,7 @@
             store() {
                 const form = this.createForm;
                 form.errors = [];
-                axios.post('/admin/api/user', {
+                axios.post('/api/admin/user', {
                     username: form.username,
                     role_ids: form.role_ids
                 })
@@ -329,7 +329,7 @@
             update() {
                 const form = this.editForm;
                 form.errors = [];
-                axios.put('/admin/api/user/' + form.id, {
+                axios.put('/api/admin/user/' + form.id, {
                     username: form.username,
                     name: form.name,
                     user_id: form.user_id,
@@ -351,7 +351,7 @@
             },
 
             destroy(user) {
-                axios.delete('/admin/api/user/' + user.id)
+                axios.delete('/api/admin/user/' + user.id)
                     .then(response => {
                         this.errors = [];
                         this.getUsers();
