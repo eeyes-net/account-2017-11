@@ -62,5 +62,6 @@ class Kernel extends HttpKernel
         'cas.guest' => \Subfission\Cas\Middleware\RedirectCASAuthenticated::class,
         'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
         'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
+        'admin' => \App\Http\Middleware\CheckAdmin::class,
     ];
 }

@@ -17,9 +17,9 @@ Route::get('login', 'Auth\LoginController@login')->middleware('guest')->name('lo
 Route::get('logout', 'Auth\LoginController@logout');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::view('home', 'home')->middleware('cas.auth')->name('home');
+Route::view('home', 'home')->middleware('auth')->name('home');
 
-Route::prefix('admin')->namespace('Admin\Api')->middleware('cas.auth')->group(function () {
+Route::prefix('admin')->namespace('Admin\Api')->middleware(['auth', 'admin'])->group(function () {
     Route::view('/', 'admin.index')->name('admin');
     Route::view('user', 'admin.user');
     Route::view('role', 'admin.role');

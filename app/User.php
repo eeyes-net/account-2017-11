@@ -194,4 +194,8 @@ class User extends Authenticatable
             'roomphone' => $info['roomphone'],
         ]);
     }
+
+    public function isAdmin() {
+        return $this->can('eeyes.website.account.admin');
+    }
 }
