@@ -20,14 +20,15 @@ class LoginController extends Controller
             $user->save();
         }
         Auth::login($user);
-        return redirect()->intended();
+        return redirect()->intended('/');
     }
 
     public function logout()
     {
         Auth::logout();
+        Session::flush();
         Session::save();
-        cas()->logout(url('/'));
+        Cas::logout(url('/'));
         // never reach
     }
 }
