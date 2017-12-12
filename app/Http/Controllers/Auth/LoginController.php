@@ -14,7 +14,7 @@ class LoginController extends Controller
     {
         Cas::authenticate();
         $net_id = Cas::user();
-        $user = User::where('username', $net_id)->first();
+        $user = User::whereUsername($net_id)->first();
         if (!$user) {
             $user = User::newByNetId($net_id);
             $user->save();
