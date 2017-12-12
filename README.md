@@ -9,14 +9,37 @@
 
 ## 后端部署
 
-1. `composer install`
-2. `php artisan migrate`
-3. `php artisan passport:install`
+```bash
+git clone https://github.com/eeyes-net/mcm-2017-11.git
+composer install
+vi .env
+php artisan migrate
+php artisan passport:install
+php artisan install
+php artisan install:admin your_net_id
+```
+
+### 注意事项
+
+* 开发过程中可以使用laravel-ide-helper生成PHPDoc帮助IDE解释类
+    ```bash
+    php artisan ide-helper:generate
+    php artisan ide-helper:meta
+    php artisan ide-helper:models
+    ```
 
 ## 编译前端文件
 
-1. `npm install`
-2. `npm run build`（开发过程中使用`npm run watch`持续监控文件修改，即时重新编译）
+```bash
+npm install
+npm run production
+```
+
+### 注意事项
+
+* 开发过程中使用`npm run build`编译成可调试文件或使用`npm run watch`持续监控文件修改，即时重新编译。
+* 使用[vue-devtools](https://github.com/vuejs/vue-devtools)在Chrome中调试Vue.js。
+* 使用`mix.sourceMaps();`打开`sourceMaps`功能，可以在Chrome中根据源文件调试，而不是Webpack后的一整个文件。
 
 ## LICENSE
 
