@@ -50,13 +50,15 @@
                         <p><strong>{{ $client->name }}</strong> 请求获取权限：</p>
                         <p>应用创建时间： {{ $client->created_at }}</p>
                         <?php $developer = \App\User::find($client->user_id); ?>
-                        <p>应用开发者： {{ $developer->name }}
-                            @if ($developer->hasRole('eeyes.website.account.verified_developer'))
-                                <span class="label label-info">e瞳认证开发者</span>
-                            @else
-                                <span class="label label-default">未认证开发者</span>
-                            @endif
-                        </p>
+                        @if ($developer)
+                            <p>应用开发者： {{ $developer->name }}
+                                @if ($developer->hasRole('eeyes.website.account.verified_developer'))
+                                    <span class="label label-info">e瞳认证开发者</span>
+                                @else
+                                    <span class="label label-default">未认证开发者</span>
+                                @endif
+                            </p>
+                        @endif
                         <p>应用跳转网址： {{ $client->redirect }}</p>
 
                         <!-- Scope List -->
