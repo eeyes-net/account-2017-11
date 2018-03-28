@@ -28,6 +28,11 @@ class LoginController extends Controller
         Auth::logout();
         Session::flush();
         Session::save();
+        if (request()->has('url')) {
+            // TODO validate url
+            Cas::logout(request()->get('url'));
+            // never reach
+        }
         Cas::logout(url('/'));
         // never reach
     }
